@@ -3,9 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>JS practice</title>
   </head>
   <body>
+    <h1 class="main-title">Lorem ipsum dolor sit amet.</h1>
+    <p class="text">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quasi
+      aut iusto eveniet! Inventore, voluptas dolorum. Voluptatibus accusamus sit
+      ab, fugit nam obcaecati excepturi alias!
+    </p>
+    <form class="exmpl-form" name="exmpl_form">
+      <label class="subscribe-form-label" for="user-email">
+        <input
+          class="user-email"
+          type="email"
+          name="useremail"
+          id="user_email"
+          placeholder="E-mail"
+        />
+      </label>
+      <button class="subscribe-button" type="submit">
+        Subscribe
+        <svg class="icon" width="24" height="24">
+          <use href="./images/icons.svg#plane"></use>
+        </svg>
+      </button>
+    </form>
     <script type="module" src="./js/training.js" defer></script>
     <script type="module" src="./js/learn.js" defer></script>
   </body>
