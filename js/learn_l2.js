@@ -117,6 +117,18 @@ switch (fruit) {
     console.log("The fruit is unknown");
 }
 
+// switch с оператором return вместо break
+function getShippingCost(country) {
+  switch (country) {
+    case "China":
+      return "Shipping to China will cost 100 credits"; // Завершает функцию
+    case "Chile":
+      return "Shipping to Chile will cost 250 credits"; // Завершает функцию
+    default:
+      return "Sorry, there is no delivery to your country"; // Завершает функцию
+  }
+}
+
 // ================================================
 
 // Логічні оператори
