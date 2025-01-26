@@ -155,3 +155,77 @@ const user3 = {
 };
 
 console.log(user3.name); // "Henry Sibola"
+
+// =================================================
+
+// Перебір об'єктів
+
+// Цикл for...in
+// for (key in object) {
+//   // інструкції
+// }
+const book2 = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  rating: 8.38,
+};
+
+for (const key in book2) {
+  console.log(key); // Ключ
+  console.log(book2[key]); // Значення властивості з таким ключем
+}
+
+// Example
+const apartment2 = {
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+};
+
+const keys = [];
+const values = [];
+
+for (const key in apartment2) {
+  keys.push(key);
+  values.push(apartment2[key]);
+}
+
+console.log(keys); // ["descr", "rating", "price"]
+console.log(values); // ["Spacious apartment in the city center", 4, 2153]
+
+// ------------------------------------------------
+
+// Метод Object.keys() - приймає об'єкт і повертає масив ключів його властивостей. If no keys - return empty array.
+// Object.keys(object)
+const keys2 = Object.keys(book2);
+console.log(keys2); // ['title', 'author', 'genres', 'rating']
+
+// Скомбінувавши результат Object.keys() і цикл for...of, можна зручно перебрати властивості об'єкта,
+// не вдаючись до використання циклу for...in
+const book3 = {
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  rating: 8.38,
+};
+const keys3 = Object.keys(book3);
+
+for (const key of keys3) {
+  console.log(key); // Ключ
+  console.log(book3[key]); // Значення властивості
+}
+
+// ------------------------------------------------
+
+// Метод Object.values() - приймає об'єкт і повертає масив значень його властивостей. If no values - return empty array.
+// Object.values(object)
+const book5 = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  rating: 8.38,
+};
+const keys5 = Object.keys(book5);
+console.log(keys5); // ['title', 'author', 'rating']
+
+const values5 = Object.values(book5);
+console.log(values5); // ["The Last Kingdom", "Bernard Cornwell", 8.38]
