@@ -229,3 +229,226 @@ console.log(keys5); // ['title', 'author', 'rating']
 
 const values5 = Object.values(book5);
 console.log(values5); // ["The Last Kingdom", "Bernard Cornwell", 8.38]
+
+// =================================================
+
+// Масив об’єктів
+// const arrtName = [
+//   { key1: property1, key12: property12 },
+//   { key2: property2, key22: property22 },
+//   { key3: property3, keys31: property31 },
+// ];
+// Для перебору такого масиву - for...of
+
+// Example
+const colors = [
+  { hex: "#f44336", rgb: "244,67,54" },
+  { hex: "#2196f3", rgb: "33,150,243" },
+  { hex: "#4caf50", rgb: "76,175,80" },
+  { hex: "#ffeb3b", rgb: "255,235,59" },
+];
+
+const hexColors = [];
+const rgbColors = [];
+
+for (const color of colors) {
+  hexColors.push(color.hex);
+  rgbColors.push(color.rgb);
+}
+
+// ------------------------------------------------
+
+// Пошук об'єкта за значенням властивості
+const books = [
+  { title: "The Last Kingdom", author: "Bernard Cornwell" },
+  { title: "Beside Still Waters", author: "Robert Sheckley" },
+  { title: "The Dream of a Ridiculous Man", author: "Fyodor Dostoevsky" },
+];
+
+const authorToSearchFor = "Robert Sheckley";
+
+for (const book of books) {
+  if (book.author === authorToSearchFor) {
+    console.log(book);
+    console.log(book.title);
+    console.log(book.rating);
+  }
+}
+
+// ------------------------------------------------
+
+// Колекція значень властивості
+
+// Example 1
+// Список назв усіх книг у колекції books
+const books2 = [
+  { title: "The Last Kingdom", author: "Bernard Cornwell", rating: 8.2 },
+  { title: "Beside Still Waters", author: "Robert Sheckley", rating: 9 },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 6.8,
+  },
+];
+
+const titles = [];
+
+for (const book of books2) {
+  titles.push(book.title);
+}
+
+console.log(titles); // ["The Last Kingdom", "Beside Still Waters", "The Dream of a Ridiculous Man"]
+
+// Example 2
+// Cередній рейтинг усієї колекції
+let totalRating = 0;
+
+for (const book of books2) {
+  totalRating += book.rating;
+}
+
+const averageRating = totalRating / books2.length;
+console.log(averageRating); // 8
+
+// ------------------------------------------------
+// Напиши функцію getAllPropValues(propName), яка приймає один параметр propName - ім'я (ключ) властивості.
+// Функція повинна повернути масив усіх значень властивості з таким ім'ям з кожного об'єкта в масиві products.
+// Якщо в об'єктах відсутні властивості з таким ім'ям, функція повинна повернути порожній масив.
+function getAllPropValues(propName) {
+  const products = [
+    { name: "Radar", price: 1300, quantity: 4 },
+    { name: "Scanner", price: 2700, quantity: 3 },
+    { name: "Droid", price: 400, quantity: 7 },
+    { name: "Grip", price: 1200, quantity: 9 },
+  ];
+  const newArr = [];
+
+  for (const product of products) {
+    if (propName in product) {
+      newArr.push(product[propName]);
+    }
+  }
+  return newArr;
+}
+
+getAllPropValues("name");
+getAllPropValues("quantity");
+getAllPropValues("price");
+getAllPropValues("category");
+
+// Функція calculateTotalPrice(productName) приймає один параметр productName- назва товару.
+// Функція містить масив об'єктів products з такими властивостями, як name — ім'я товару, price — ціна і quantity — кількість.
+// Доповни код функції так, щоб вона повертала загальну вартість (ціна * кількість) товару з таким ім'ям з масиву products.
+// Якщо продукту з такою назвою немає, то функція повинна повертати рядок "Product <productName> not found!" , де <productName> — це ім'я товару.
+function calculateTotalPrice(productName) {
+  const products = [
+    { name: "Radar", price: 1300, quantity: 4 },
+    { name: "Scanner", price: 2700, quantity: 3 },
+    { name: "Droid", price: 400, quantity: 7 },
+    { name: "Grip", price: 1200, quantity: 9 },
+  ];
+
+  for (const product of products) {
+    if (product.name === productName) {
+      return product.price * product.quantity;
+    }
+  }
+  return `Product ${productName} not found!`;
+}
+
+calculateTotalPrice("Blaster");
+calculateTotalPrice("Radar");
+calculateTotalPrice("Droid");
+calculateTotalPrice("Grip");
+calculateTotalPrice("Scanner");
+
+// =================================================
+
+// Методи об'єкта - значення властивості — це функція
+// const obj = {
+//   method(value) {
+//     console.log(`I'm a method with ${value}!`);
+//   },
+// };
+
+// obj.method(5); // "I'm a method with 5!"
+// obj.method(10); // "I'm a method with 10!"
+const bookShelf = {
+  books: ["The Last Kingdom", "Dream Guardian"],
+  // Це метод об'єкта
+  getBooks() {
+    return "Returning all books";
+  },
+  // Це метод об'єкта
+  addBook(bookName) {
+    return `Adding book ${bookName}`;
+  },
+};
+
+// Виклики методів
+bookShelf.getBooks(); // поверне "Returning all books"
+bookShelf.addBook("New book 1"); // поверне "Adding book New book 1"
+bookShelf.addBook("New book 2"); // поверне "Adding book New book 2"
+
+// ------------------------------------------------
+
+// Доступ до властивостей об'єкта - використовується не ім'я змінної цього об’єкта, наприклад bookShelf, а ключове слово this
+// const bookShelf = {
+//   books: ["The Last Kingdom", "The Mist"],
+//   getBooks() {
+//     console.log(this);
+//   },
+// };
+
+// bookShelf.getBooks(); // {books: ["The Last Kingdom", "The Mist"], getBooks: f}
+
+// Example
+const bookShelf2 = {
+  books: ["The Last Kingdom", "The Mist"],
+  getBooks() {
+    return this.books;
+  },
+};
+
+console.log(bookShelf2.getBooks()); // ["The Last Kingdom", "The Mist"]
+
+// ------------------------------------------------
+
+// Зміна об'єкта в масиві
+// const bookShelf = {
+//   books: [
+//     { title: "The Last Kingdom", rating: 8 },
+//     { title: "The Mist", rating: 6 },
+//   ],
+//   changeRating(bookName, newRating) {
+//     for (const book of this.books) {
+//       if (book.title === bookName) {
+//         // Знайшли необхідний об’єкт за назвою книги
+//       }
+//     }
+//   },
+// };
+
+// Example
+const atTheOldToad = {
+  potions: [
+    { name: "Speed potion", price: 460 },
+    { name: "Stone skin", price: 520 },
+  ],
+  getPotions() {
+    return this.potions;
+  },
+  updatePotionName(oldName, newName) {
+    for (const potion of this.potions) {
+      if (potion.name === oldName) {
+        potion.name = newName;
+      }
+    }
+    // return this.potions;
+  },
+};
+
+atTheOldToad.updatePotionName("Stone skin", "Invisibility");
+console.log(atTheOldToad.getPotions()); // [{name: 'Dragon breath', price: 460}, {name: 'Invisibility', price: 520}]
+console.log(atTheOldToad.updatePotionName("Speed potion", "Dragon breath")); // undefined - because no return
+console.log(atTheOldToad.potions); // [{name: 'Dragon breath', price: 460}, {name: 'Invisibility', price: 520}]
