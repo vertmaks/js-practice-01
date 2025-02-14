@@ -1,4 +1,5 @@
-// Колбек-функції
+//* Колбек-функції
+
 // Example 1
 function greet(name) {
   console.log(`Welcome ${name}!`);
@@ -31,7 +32,7 @@ function makeMessage(pizzaName, callback) {
 
 // ------------------------------------------------
 
-// Інлайн-колбеки
+//* Інлайн-колбеки
 
 // Передаємо інлайн-функцію greet у якості колбека
 registerGuest("Mango", function greet(name) {
@@ -45,10 +46,10 @@ registerGuest("Poly", function notify(name) {
 
 // ------------------------------------------------
 
-// Метод forEach(callback) - використовується для заміни for і for...of в роботі з колекцією
-// array.forEach(function callback(element, index, array) {
-//   // Тіло колбек-функції
-// });
+//* Метод forEach(callback) - використовується для заміни for і for...of в роботі з колекцією
+//? array.forEach(function callback(element, index, array) {
+//?    Тіло колбек-функції
+//? });
 
 // Поелементно перебирає масив array
 // Викликає колбек-функцію для кожного елемента масиву
@@ -69,7 +70,7 @@ numbers.forEach(function (number, index) {
   console.log(`Index ${index}, value ${number}`);
 });
 
-// Єдиний випадок, коли варто використовувати цикли for або for...of для перебирання масиву, — це задачі з перериванням виконання циклу. Перервати виконання методу forEach не можна, він завжди перебирає масив до кінця
+//! Єдиний випадок, коли варто використовувати цикли for або for...of для перебирання масиву, — це задачі з перериванням виконання циклу. Перервати виконання методу forEach не можна, він завжди перебирає масив до кінця
 
 // Example 2
 function calculateTotalPrice(orderedItems) {
@@ -95,37 +96,41 @@ function filterArray(numbers, value) {
 
 // =================================================
 
-// Стрілочні функції
-// const arrowAdd = (a, b, c) => {
-//   return a + b + c;
-// };
-// const add = a => {
-//   return a + 5;
-// };
+//* Стрілочні функції
 
-// Якщо параметри відсутні, то обов'язково повинні бути порожні круглі дужки
-// const greet = () => {
-//   console.log("Hello!");
-// };
+// Common examples:
+//? const arrowAdd = (a, b, c) => {
+//?   return a + b + c;
+//? };
+//? const add = a => {
+//?   return a + 5;
+//? };
+
+//! Якщо параметри відсутні, то обов'язково повинні бути порожні круглі дужки
+//? const greet = () => {
+//?   console.log("Hello!");
+//? };
 
 // ------------------------------------------------
 
-// Неявне повернення
+//* Неявне повернення
 
-//Запис із фігурними дужками
+// Запис із фігурними дужками
 // Якщо є фігурні дужки і функція повинна повертати якесь значення, необхідно явно поставити return
-// const add = (a, b, c) => {
-//   console.log(a, b, c);
-//   return a + b + c;
-// };
+//? const add = (a, b, c) => {
+//?   console.log(a, b, c);
+//?   return a + b + c;
+//? };
 
 // Запис без фігурних дужок
 // Якщо фігурні дужки відсутні, то повертається результат виразу, який стоїть після =>
-// const add = (a, b, c) => a + b + c;
+//? const add = (a, b, c) => a + b + c;
+
 const arrowAdd = (a, b, c) => a + b + c;
 
-// !!!Hемає локальної змінної arguments!!!
+//! Hемає локальної змінної arguments
 // Use ...args
+
 const add = (...args) => {
   console.log(args);
 };
@@ -134,10 +139,10 @@ add(1, 2, 3); // [1, 2, 3]
 
 // =================================================
 
-// Метод map()
-// array.map((element, index, array) => {
-//   // Тіло колбек-функції
-// });
+//* Метод map()
+//? array.map((element, index, array) => {
+//?    Тіло колбек-функції
+//? });
 
 // Example
 const planets = ["Earth", "Mars", "Venus", "Jupiter"];
@@ -153,10 +158,10 @@ console.log(planets); // ["Earth", "Mars", "Venus", "Jupiter"]
 
 // ------------------------------------------------
 
-// Метод flatMap()
-// array.flatMap((element, index, array) => {
-//   // Тіло колбек-функції
-// });
+//* Метод flatMap()
+//? array.flatMap((element, index, array) => {
+//?    Тіло колбек-функції
+//? });
 
 // Example
 const students = [
@@ -173,10 +178,10 @@ console.log(flattenedCourses); // ["mathematics", "physics", "science", "mathema
 
 // ------------------------------------------------
 
-// Метод filter() - використовується для фільтрації масиву
-// array.filter((element, index, array) => {
-//   // Тіло колбек-функції
-// });
+//* Метод filter() - використовується для фільтрації масиву
+//? array.filter((element, index, array) => {
+//?    Тіло колбек-функції
+//? });
 
 // Example
 const values = [51, -3, 27, 21, -68, 42, -37];
@@ -198,7 +203,7 @@ console.log(values); // [51, -3, 27, 21, -68, 42, -37]
 
 // ------------------------------------------------
 
-// Метод filter() на масиві об'єктів
+//* Метод filter() на масиві об'єктів
 
 // Example
 const LOW_SCORE = 50;
@@ -224,10 +229,10 @@ console.log(average); // Масив об'єктів з іменами Poly і Ho
 
 // ------------------------------------------------
 
-// Метод find() - дозволяє знайти і повернути перший відповідний елемент, що задовольняє умову
-// array.find((element, index, array) => {
-//   // Тіло колбек-функції
-// });
+//* Метод find() - дозволяє знайти і повернути перший відповідний елемент, що задовольняє умову
+//? array.find((element, index, array) => {
+//?    Тіло колбек-функції
+//? });
 
 // Example
 const colorPickerOptions = [
@@ -244,10 +249,10 @@ colorPickerOptions.find((option) => option.label === "white"); // undefined
 
 // ------------------------------------------------
 
-// Метод every() - перевіряє, чи задовольняють усі елементи умову колбек-функції
-// array.every((element, index, array) => {
-//   // Тіло колбек-функції
-// });
+//* Метод every() - перевіряє, чи задовольняють усі елементи умову колбек-функції
+//? array.every((element, index, array) => {
+//?    Тіло колбек-функції
+//? });
 
 //Examples
 // Усі елементи більші або дорівнюють нулю? - так
@@ -258,10 +263,10 @@ colorPickerOptions.find((option) => option.label === "white"); // undefined
 
 // ------------------------------------------------
 
-// Метод some() - перевіряє, чи задовольняє хоча б один елемент умову колбек-функції
-// array.some((element, index, array) => {
-//   // Тіло колбек-функції
-// });
+//* Метод some() - перевіряє, чи задовольняє хоча б один елемент умову колбек-функції
+//? array.some((element, index, array) => {
+//?    Тіло колбек-функції
+//? });
 
 // Examples
 // Чи є хоча б один елемент, що більший або дорівнює нулю? - так
@@ -278,10 +283,10 @@ colorPickerOptions.find((option) => option.label === "white"); // undefined
 
 // ------------------------------------------------
 
-// Метод reduce() - використовується для послідовної обробки кожного елемента масиву із збереженням проміжного результату
-// array.reduce((previousValue, element, index, array) => {
-//   // Тіло колбек-функції
-// }, initialValue);
+//* Метод reduce() - використовується для послідовної обробки кожного елемента масиву із збереженням проміжного результату
+//? array.reduce((previousValue, element, index, array) => {
+//?    Тіло колбек-функції
+//? }, initialValue);
 
 // Метод reduce() очікує 2 параметри:
 
@@ -312,7 +317,7 @@ const averagePlayTime = totalPlayTime / playtimes.length;
 
 // ------------------------------------------------
 
-// Метод reduce() і масив об'єктів
+//* Метод reduce() і масив об'єктів
 
 // Example 1
 const students3 = [
@@ -344,7 +349,7 @@ const totalAveragePlaytimePerGame = players2.reduce((averageTime, player) => {
 
 // ------------------------------------------------
 
-// Метод toSorted() - сортує елементи масиву
+//* Метод toSorted() - сортує елементи масиву
 
 // Масив чисел
 // Example 1
@@ -370,10 +375,10 @@ const letters = ["b", "B", "a", "A", "c", "C"];
 
 console.log(letters.toSorted()); // ["A", "B", "C", "a", "b", "c"]
 
-// Свій порядок сортування ЧИСЕЛ
-// array.toSorted((a, b) => {
-//   // Callback function body
-// });
+//* Свій порядок сортування ЧИСЕЛ
+//? array.toSorted((a, b) => {
+//?    Callback function body
+//? });
 
 // Сортування за зростанням - якщо виклик compareFunction(a, b) повертає будь-яке негативне значення, тобто a менше b, сортування поставить a перед b
 const scores3 = [61, 19, 74, 35, 92, 56];
@@ -385,8 +390,8 @@ const scores4 = [61, 19, 74, 35, 92, 56];
 const descendingScores4 = scores4.toSorted((a, b) => b - a);
 console.log(descendingScores4); // [92, 74, 61, 56, 35, 19]
 
-// Свій порядок сортування РЯДКІВ
-// firstString.localeCompare(secondString);
+//* Свій порядок сортування РЯДКІВ
+//? firstString.localeCompare(secondString);
 "a".localeCompare("b"); // -1 - firstString повинен бути перед secondString
 "b".localeCompare("a"); // 1  - firstString повинен бути після secondString
 "a".localeCompare("a"); // 0  - якщо рядки однакові, повертається нуль і їх послідовність по відношенню один до одного не змінюється
@@ -400,7 +405,7 @@ console.log(inAlphabetOrder); // [ "Adrian", "Artemis", "Ganymede", "Jacob", "Ka
 const inReversedOrder = students5.toSorted((a, b) => b.localeCompare(a));
 console.log(inReversedOrder); // [ "Solomon", "Kai", "Jacob", "Ganymede", "Artemis", "Adrian" ]
 
-// Сортування об'єктів
+//* Сортування об'єктів
 const students6 = [
   { name: "Mango", score: 83 },
   { name: "Poly", score: 59 },
