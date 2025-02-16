@@ -236,7 +236,7 @@ const mango6 = new User6({
   email: "mango@mail.com",
 });
 console.log(mango6.name); // "Mango"
-// console.log(mango6.#email); // Виникне помилка, це приватна властивість
+// console.log(mango6.#email); //! Виникне помилка, це приватна властивість
 
 //* Для того щоб отримати або змінити значення приватної властивості використовуються публічні методи
 class User7 {
