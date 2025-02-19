@@ -1,5 +1,6 @@
 //* Метод call()
 //? foo.call(thisArg, arg1, arg2, ...)
+console.group("Метод call()");
 
 // thisArg — об'єкт, який ми хочемо встановити як контекст (значення this) для функції
 // arg1, arg2, ... — необов'язкові аргументи, які будуть передані функції
@@ -22,23 +23,27 @@ const poly = {
 
 greet.call(mango, "Welcome"); // "Welcome, Mango, your room is 27!"
 greet.call(poly, "Aloha"); // "Aloha, Poly, your room is 191!"
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Метод apply() - є аналогом методу call. Cинтаксис передачі аргументів вимагає масиву, навіть якщо аргументи функції — це окремі значення
 //? foo.apply(thisArg, [arg1, arg2, ...])
 // Return: Результат вызова функции
+console.group("Метод apply()");
 
 // Same function greet {}, like in method call()
 
 greet.apply(mango, ["Welcome"]); // "Welcome, Mango, your room is 27!"
 greet.apply(poly, ["Aloha"]); // "Aloha, Poly, your room is 191!"
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Метод bind() - cоздает новую функцию з встановленим контекстом, но не вызывает
 //? const boundFoo = foo.bind(thisArg, arg1, arg2, ...)
 // Return: Новая функция
+console.group("Метод bind()");
 
 // Example 1
 const customer = {
@@ -69,6 +74,8 @@ function makeMessage(callback) {
 }
 
 makeMessage(customer2.getFullName.bind(customer2)); // "Processing an application from Jacob Mercer"
+console.groupEnd();
+console.log("\n");
 
 // ================================================
 
@@ -76,10 +83,12 @@ makeMessage(customer2.getFullName.bind(customer2)); // "Processing an applicatio
 
 // Прототип об'єкта
 // [[Prototype]]
+console.group("Прототипи");
 
 // ------------------------------------------------
 
 //* Метод Object.create(obj) - створює і повертає новий об'єкт, зв'язуючи його з об'єктом obj
+console.group("Метод Object.create(obj)");
 
 const animal = {
   legs: 4,
@@ -92,27 +101,34 @@ console.log(dog); // { name: "Mango", [[Prototype]]: animal }
 
 console.log(dog.name); // "Mango"
 console.log(dog.legs); // 4
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Перевірка прототипу - method isPrototypeOf()
 //? objA.isPrototypeOf(objB)
 // Return: boolean
+console.group("method isPrototypeOf()");
 
 console.log(dog); // { name: "Mango", [[Prototype]]: animal }
 
 console.log(animal.isPrototypeOf(dog)); // true
 console.log(dog.isPrototypeOf(animal)); // false
 console.log(customer.isPrototypeOf(dog)); // false
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Перевірка власної і невласної властивості - method hasOwnProperty()
 //? obj.hasOwnProperty(key)
 // Return: boolean
+console.group("method hasOwnProperty()");
 
 console.log(dog.hasOwnProperty("name")); // true
 console.log(dog.hasOwnProperty("legs")); // false
+console.groupEnd();
+console.groupEnd();
+console.log("\n");
 
 // ================================================
 
@@ -121,6 +137,7 @@ console.log(dog.hasOwnProperty("legs")); // false
 //? class User {
 //?   Тіло класу
 //? }
+console.group("Класи");
 
 // Створення з класу екземпляру
 //? new User();
@@ -145,6 +162,7 @@ console.log(poly2); // {}
 //?      ...
 //?   }
 //? }
+console.group("method constructor()");
 
 //! Виклик класу з оператором new призводить до створення нового об'єкта й автоматичного виклику методу constructor
 class User3 {
@@ -160,10 +178,12 @@ console.log(mango3); // { name: 'Mango', email: 'mango@mail.com' }
 
 const poly3 = new User3("Poly", "poly@mail.com");
 console.log(poly3); // { name: 'Poly', email: 'poly@mail.com' }
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Об'єкт параметрів
+console.group("Об'єкт параметрів");
 
 class User4 {
   constructor(params) {
@@ -179,11 +199,15 @@ const mango4 = new User4({
 
 console.log(mango4);
 // { name: "Mango", email: "mango@mail.com" }
+console.groupEnd();
+console.groupEnd();
+console.log("\n");
 
 // ================================================
 
 //* Методи класу
 //! На відміну від синтаксису методів об'єкта (вони розділяються комою), методи класу не розділені ЖОДНИМИ спеціальними символами
+console.group("Методи класу");
 
 class User5 {
   constructor(params) {
@@ -212,12 +236,15 @@ console.log(mango5.getEmail()); // "mango@mail.com"
 mango5.changeEmail("new@mail.com");
 
 console.log(mango5.getEmail()); // "new@mail.com"
+console.groupEnd();
+console.log("\n");
 
 // ================================================
 
 //* Приватні властивості
 // Додаючи до імені властивості на початку символ #, ми робимо її приватною.
 // Оголошення приватної властивості до ініціалізації в конструкторі є обов'язковим
+console.group("Приватні властивості");
 
 class User6 {
   // Необов'язкове оголошення публічних властивостей
@@ -236,9 +263,11 @@ const mango6 = new User6({
   email: "mango@mail.com",
 });
 console.log(mango6.name); // "Mango"
-// console.log(mango6.#email); //! Виникне помилка, це приватна властивість
+console.error("console.log(mango6.#email)"); // console.log(mango6.#email); - //! Виникне помилка, це приватна властивість
+console.error("↑↑↑", "\n", "Виникне помилка, це приватна властивість");
 
 //* Для того щоб отримати або змінити значення приватної властивості використовуються публічні методи
+console.group("Публічні методи");
 class User7 {
   name;
   #email;
@@ -265,11 +294,13 @@ const mango7 = new User7({
 console.log(mango7.getEmail()); // "mango@mail.com"
 mango7.changeEmail("mango@supermail.com");
 console.log(mango7.getEmail()); // "mango@supermail.com"
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Приватні методи
 // Додаючи до назви методу на початку символ #, ми робимо його приватним
+console.group("Приватні методи");
 
 class User8 {
   name;
@@ -310,10 +341,15 @@ mango8.changeEmail("newmail.com"); // "Invalid email format"
 mango8.changeEmail("new@mail.com");
 console.log(mango8.getEmail()); // "new@mail.com"
 
-//! Прямий виклик приватного методу ззовні призведе до помилки
-// mango8.#validateEmail("test"); // Помилка
+console.error("mango8.#validateEmail('test')"); // mango8.#validateEmail("test"); - //! Прямий виклик приватного методу ззовні призведе до помилки
+console.error(
+  "↑↑↑",
+  "\n",
+  "Прямий виклик приватного методу ззовні призведе до помилки"
+);
 
 // Цей метод не доступний ззовні класу, тому користувачі (або інші розробники) не можуть його викликати напряму
+console.groupEnd();
 
 // ------------------------------------------------
 
@@ -328,6 +364,7 @@ console.log(mango8.getEmail()); // "new@mail.com"
 //? set email(newEmail) {
 //?   this.#email = newEmail;
 //? }
+console.group("Геттери і сеттери");
 
 // Example
 class User9 {
@@ -375,10 +412,12 @@ console.log(mango9.email); // mango@supermail.com
 
 //?   this.#email = newEmail;
 //? }
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Статичні властивості - властивості, що доступні тільки класові, але не його екземплярам
+console.group("Статичні властивості");
 
 class MyClass {
   static myProp = "value";
@@ -388,6 +427,12 @@ console.log(MyClass.myProp); // "value"
 
 const inst = new MyClass();
 console.log(inst.myProp); //! undefined - y екземпляра немає доступу до статичних властивостей класу
+console.warn(
+  "↑↑↑",
+  "console.log(inst.myProp)",
+  "\n",
+  "У екземпляра немає доступу до статичних властивостей класу"
+);
 
 // Example
 class User10 {
@@ -422,10 +467,12 @@ const mango10 = new User10({
 console.log(mango10.role); // "admin"
 mango10.role = User10.roles.editor;
 console.log(mango10.role); // "editor"
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Статичні методи - методи, доступні тільки класу. Вони можуть бути публічні та приватні
+console.group("Статичні методи");
 
 // Example
 class User11 {
@@ -449,6 +496,9 @@ console.log(User11.isEmailTaken("poly@mail.com")); // false
 console.log(User11.isEmailTaken("mango@mail.com")); // true
 
 //! Особливість статичних методів: під час їх виклику ключове слово this посилається на сам клас
+console.groupEnd();
+console.groupEnd();
+console.log("\n");
 
 // ================================================
 
@@ -460,6 +510,7 @@ console.log(User11.isEmailTaken("mango@mail.com")); // true
 //? }
 // можемо оголосити базовий клас, який зберігає загальні характеристики й методи для групи похідних класів,
 // які наслідують властивості й методи батьківського, але також додають свої унікальні
+console.group("Наслідування класів - extends");
 
 // Example
 class User12 {
@@ -486,11 +537,13 @@ const editor = new ContentEditor("mango@mail.com");
 console.log(editor); // { #email: "mango@mail.com" }
 console.log(editor.email); // "mango@mail.com"
 //todo Клас ContentEditor наслідує від класу User його конструктор, геттер і сеттер email, а також приватну властивість #email
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Конструктор дочірнього класу - необхідно викликати спеціальну функцію super(args) — це псевдонім конструктора батьківського класу
 //! В іншому випадку при спробі звернутися до this у конструкторі дочірнього класу виникне помилка
+console.group("Конструктор дочірнього класу - функцію super(args)");
 
 // Example
 class User13 {
@@ -524,7 +577,10 @@ const editor13 = new ContentEditor13({
 });
 console.log(editor13); // { #email: "mango@mail.com", posts: [] }
 console.log(editor13.email); // "mango@mail.com"
+console.groupEnd();
 
 // ------------------------------------------------
 
 //* Методи дочірнього класу
+// Дочірній клас може використовувати методи та властивості батьківського класу
+// У дочірньому класі можна оголошувати методи, які будуть доступні тільки його екземплярам
