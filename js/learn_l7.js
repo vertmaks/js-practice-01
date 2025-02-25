@@ -360,9 +360,356 @@ document
 //! Якщо у властивість innerHTML записати порожній рядок, то вміст елемента буде очищено. Це простий і швидкий спосіб видалення всього вмісту
 console.groupEnd();
 
+// ------------------------------------------------
+
+console.group("Метод insertAdjacentHTML()");
+//* Метод insertAdjacentHTML() - метод для додавання рядка з HTML-тегами перед, після або всередину елемента
+//? element.insertAdjacentHTML(position, string)
+// position — рядок, який визначає позицію щодо element:
+// "beforebegin" — перед element
+// "afterbegin" — всередині element, перед усіма дітьми
+// "beforeend" — всередині element, після усіх дітей
+// "afterend" — після element
+
+//! "beforebegin" і "afterend" працюють тільки тоді, коли element вже знаходиться в DOM-дереві
+
+// Example (continue example at line 336)
+const newTechnologies = ["React", "TypeScript", "Node.js"];
+const newMarkup = newTechnologies
+  .map((technology) => `<li class="list-item new">${technology}</li>`)
+  .join("");
+
+list2.insertAdjacentHTML("beforeend", newMarkup);
+list2.insertAdjacentHTML(
+  "beforebegin",
+  "<h2 class='second-title'>Popular technologies</h2><p>↑ title with <span class='accent'>'beforebegin'</span> position ↑</p>"
+);
+
+document.querySelectorAll(".list-item.new").forEach((item) => {
+  const span = document.createElement("span");
+  span.textContent = "🟢 ";
+  item.prepend(span);
+});
+
+document.querySelector(".tech-section .second-title").style.marginBottom = "0";
+document.querySelector(".tech-section .accent").style.color = "brown";
+document.querySelector(".tech-section p").style.marginTop = "0";
+
+console.groupEnd();
+
 console.groupEnd();
 console.log("\n");
 
+// ================================================
+
+console.group("Події");
+
+// ---
+
+console.group("Метод addEventListener()");
+//* Метод addEventListener() - додає слухача події до елемента
+//? element.addEventListener(event, handler, options)
+// event — рядок, що містить ім'я події, наприклад, "click"
+// handler — колбек-функція, яка буде викликана під час настання події
+// options — необов'язковий об'єкт параметрів із розширеними налаштуваннями
+
+// Example
+const button2 = document.querySelector(".my-button");
+
+button2.addEventListener("click", () => {
+  console.log(
+    "Anonymous f:",
+    "The button was pressed and now the next image will appear"
+  );
+});
+
+//#region ↓ or with a non-anonymous function ↓
+const handleClick = () => {
+  console.log("Non-anonymous f:", "the button was pressed...");
+};
+
+button2.addEventListener("click", handleClick);
+//#endregion
+
+//#region Additional markup (not this theme)
+const eventSection = document.querySelector(".event-listener");
+eventSection.insertAdjacentHTML("afterbegin", "<h2>Events</h2>");
+//#endregion
+
+//! На одному елементі може бути будь-яка кількість обробників подій, навіть подій одного типу.
+//! Колбек-функції будуть викликатися в порядку їхньої реєстрації в коді.
+
+// ---
+
+console.group("once: true");
+//* once: true - use the event only once
+const onceBtn = document.querySelector(".once-btn");
+onceBtn.addEventListener(
+  "click",
+  () =>
+    console.log("Disposable button (only once!):", "the button was pressed..."),
+  {
+    once: true,
+  }
+);
+
+console.log("Create a one-time event!");
+console.groupEnd();
+
+console.groupEnd();
+
 // ------------------------------------------------
 
-//* Метод insertAdjacentHTML()
+console.group("Метод removeEventListener()");
+//* Метод removeEventListener() - видаляє слухача події з елемента.
+//! Only with non-anonymous functions
+//? element.removeEventListener(event, handler, options)
+
+// Example
+const addListenerBtn = document.querySelector(".js-add");
+const removeListenerBtn = document.querySelector(".js-remove");
+const targetBtn = document.querySelector(".target-btn");
+
+const handleClick2 = () => {
+  console.log("Click-click 😄");
+};
+
+//#region For fun
+const doesntClick = () => {
+  console.log("Doesn't click ☹️");
+};
+targetBtn.addEventListener("click", doesntClick);
+const updateListener = () => {
+  if (isListenerAdded) {
+    targetBtn.removeEventListener("click", doesntClick);
+    targetBtn.addEventListener("click", handleClick2);
+  } else {
+    targetBtn.addEventListener("click", doesntClick);
+    targetBtn.removeEventListener("click", handleClick2);
+  }
+};
+//#endregion
+
+let isListenerAdded = false; // Flag 🚩
+
+addListenerBtn.addEventListener("click", () => {
+  if (isListenerAdded) {
+    console.log("The 'Click me' button already has an event listener");
+  } else {
+    console.log("Event listener was added to 'Click me' button");
+    isListenerAdded = true; // Flag added
+    updateListener();
+  }
+});
+
+removeListenerBtn.addEventListener("click", () => {
+  if (!isListenerAdded) {
+    console.log(
+      "The event listener has already been removed from the 'Click me' button"
+    );
+  } else {
+    console.log(
+      "The event listener has been removed from the 'Click me' button"
+    );
+    isListenerAdded = false; // Flag removed
+    updateListener();
+  }
+});
+
+console.groupEnd();
+
+// ------------------------------------------------
+
+console.group("Об'єкт події");
+//* Об'єкт події
+
+const eventObjBtn = document.querySelector(".event-obj");
+const handleClick3 = (event) => {
+  console.log("event:", event);
+};
+
+eventObjBtn.addEventListener("click", handleClick3);
+
+// event — об'єкт події, автоматично передається першим аргументом під час виклику колбек-функції
+// Mожнa називати  як завгодно, як правило - e, evt, event
+
+// ---
+
+console.group("Властивості об'єкта події");
+//* Властивості об'єкта події:
+// event.type — тип події;
+// event.currentTarget — елемент, на якому виконується обробник події;
+
+const handleClick4 = (event) => {
+  console.log("event type: ", event.type);
+  console.log("currentTarget: ", event.currentTarget);
+};
+
+eventObjBtn.addEventListener("click", handleClick4);
+
+console.groupEnd();
+
+console.groupEnd();
+
+// ------------------------------------------------
+
+console.group("Події клавіатури");
+//* Події клавіатури
+// keydown — подія, що відбувається при натисканні клавіші
+// keyup — подія, що відбувається, коли клавішу відпустили
+// походять від базового класу KeyboardEvent
+
+document.addEventListener("keydown", (event) => {
+  console.log("Keydown: ", event);
+});
+
+document.addEventListener("keyup", (event) => {
+  console.log("Keyup: ", event);
+});
+
+// ---
+
+console.group("Властивості key і code");
+//* Властивості key і code
+//todo key - return символ, згенерований натисканням клавіші на клавіатурі
+// Ця властивість враховує: стан клавіш-модифікаторів, наприклад Shift i поточну мову
+//todo code - return код фізичної клавіші на клавіатурі й не залежить від мови та стану клавіш-модифікаторів
+
+document.addEventListener("keydown", (event) => {
+  console.log("key: ", event.key);
+  console.log("code: ", event.code);
+});
+
+console.groupEnd();
+console.groupEnd();
+
+// ================================================
+
+console.group("Події елементів форм");
+//* Події елементів форм
+
+// ---
+
+console.group("Подія submit");
+//* Подія submit
+//! Подія submit відбувається безпосередньо на формі (тег form), тому обробник подій слід встановлювати саме на ній
+
+//? Example
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+  // ...
+});
+
+// ---
+
+console.group("Mетод preventDefault()");
+//* Mетод preventDefault() - скасування дії браузера за замовчуванням в об'єкта події, наприклад, перезавантаження сторінки при відправленні форми
+
+//? Example
+const form2 = document.querySelector("form");
+
+form2.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
+console.groupEnd();
+
+//? Live example (submit event)
+const registerForm = document.querySelector(".form");
+
+registerForm.addEventListener("submit", handleSubmit);
+
+function handleSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  const login = form.elements.login.value;
+  const password = form.elements.password.value;
+
+  if (login === "" || password === "") {
+    return console.log("Please fill in all the fields!");
+  }
+
+  console.log(`Login: ${login}, Password: ${password}`);
+  form.reset();
+}
+
+//todo Властивість elements DOM-елемента форми містить об'єкт з посиланнями на всі її елементи, які мають атрибут name. Саме тому в прикладі ми отримуємо значення полів, звертаючись до event.target.elements.login.value і event.target.elements.password.value
+console.groupEnd();
+
+// ------------------------------------------------
+
+console.group("Подія change");
+//* Подія change -  відбувається після зміни елемента форми
+//todo для текстових полів або textarea подія відбудеться не на кожному введенні символу, а після втрати фокусу
+//todo для інших елементів, наприклад, select, чекбоксів і радіокнопок, подія change спрацьовує відразу під час вибору значення
+
+//? Live example
+const select = document.querySelector(".pizza-select");
+const textOutput = document.querySelector(".text-output");
+const valueOutput = document.querySelector(".value-output");
+
+select.addEventListener("change", setOutput);
+
+function setOutput(event) {
+  const selectedOptionValue = event.currentTarget.value;
+  const selectedOptionIndex = event.currentTarget.selectedIndex;
+  const selectedOptionText =
+    event.currentTarget.options[selectedOptionIndex].text;
+
+  textOutput.textContent = selectedOptionText;
+  valueOutput.textContent = selectedOptionValue;
+}
+
+console.groupEnd();
+
+// ------------------------------------------------
+
+console.group("Подія input");
+//* Подія input - відбувається тільки на текстових полях і textarea
+//todo створюється щоразу при зміні значення елемента, не чекаючи втрати фокусу
+
+//? Live example
+const textInput = document.querySelector(".text-input");
+const output = document.querySelector(".output");
+
+textInput.addEventListener("input", (event) => {
+  output.textContent = event.currentTarget.value;
+});
+
+console.groupEnd();
+
+// ------------------------------------------------
+
+//* Подія focus і blur
+// focus відбувається під час фокусування на елементі
+// blur відбувається при втраті фокусу
+
+// Активувати або скасувати фокус можна програмно. Для цього треба викликати в коді для елемента однойменні методи focus() і blur()
+
+//? Live example
+const textInput2 = document.querySelector(".text-input-2");
+const setFocusBtn = document.querySelector('[data-action="set"]');
+const removeFocusBtn = document.querySelector('[data-action="remove"]');
+
+setFocusBtn.addEventListener("click", () => {
+  textInput2.focus();
+});
+
+removeFocusBtn.addEventListener("click", () => {
+  textInput2.blur();
+});
+
+textInput2.addEventListener("focus", () => {
+  textInput2.value = "This input has focus";
+});
+
+textInput2.addEventListener("blur", () => {
+  textInput2.value = "";
+});
+
+//! Фокус може бути тільки на одному елементі сторінки за одиницю часу
+// Поточний елемент, на якому знаходиться фокус, доступний як document.activeElement
+//! не інтерактивнi елементи не можуть отримати фокус
+console.groupEnd();
+
+console.groupEnd();
+console.log("\n");
