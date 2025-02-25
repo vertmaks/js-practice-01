@@ -325,7 +325,44 @@ console.groupEnd();
 //* Властивість innerHTML
 console.group("Властивість innerHTML");
 
+// Example 1
+const title = document.querySelector(".article .title");
+title.innerHTML = 'New and <span class="accent">improved</span> title';
+
+const titleAccent = document.querySelector(".article .title .accent");
+titleAccent.style.color = "tomato";
+titleAccent.style.textDecoration = "underline";
+
+// Example 2
+const technologies = ["HTML", "CSS", "JavaScript", "React", "Node"];
+const list2 = document.querySelector(".list");
+
+const markup = technologies
+  .map((technology) => `<li class="list-item">${technology}</li>`)
+  .join("");
+
+// Check the console, you'll see a single string with HTML tags
+console.log(markup);
+
+// Adding all the markup in one operation
+list2.innerHTML = markup;
+
+list2.style.padding = "0";
+list2.style.margin = "0";
+list2.style.listStyleType = "none";
+
+document
+  .querySelectorAll(".list-item")
+  .forEach((item) => (item.style.padding = "8px"));
+//   border-width: 2px;
+//   border-style: dashed;
+
+//! Якщо у властивість innerHTML записати порожній рядок, то вміст елемента буде очищено. Це простий і швидкий спосіб видалення всього вмісту
 console.groupEnd();
 
 console.groupEnd();
 console.log("\n");
+
+// ------------------------------------------------
+
+//* Метод insertAdjacentHTML()
