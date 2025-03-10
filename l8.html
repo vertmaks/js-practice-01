@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS practice. L8 — events and libraries</title>
+
+    <!-- ↓ lightbox -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css"
+    />
+    <!-- ↑ lightbox -->
+
+    <link rel="stylesheet" href="./styles/index.css" />
+    <style>
+      section {
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+    </style>
+  </head>
+  <body
+    style="padding: 25px; display: block; margin: 0 auto; max-width: 1024px"
+  >
+    <h1 class="main-title">L8</h1>
+    <p class="main-text">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quasi
+      aut iusto eveniet! Inventore, voluptas dolorum. Voluptatibus accusamus sit
+      ab, fugit nam obcaecati excepturi alias!
+    </p>
+
+    <p style="text-align: center; margin-top: 35px">Event propagation</p>
+    <img
+      src="./images/748686c5-6b17-4c86-8928-1ccffe077788Frame 48663.jpg"
+      alt="event propagation"
+    />
+
+    <h2>Target / Цільовий елемент</h2>
+    <div id="parent">
+      Parent
+      <div id="child">
+        Child
+        <div id="descendant">Descendant</div>
+      </div>
+    </div>
+
+    <h2>Event delegation</h2>
+    <p>Event without delegation</p>
+    <img
+      src="./images/dcdcf9ef-631f-4293-a2e2-d50b1b80bdd0Frame 48665.jpg"
+      alt="event without delegation"
+    />
+    <p>Event delegation</p>
+    <img
+      src="./images/59b8b4a2-bc6b-484e-abb7-aeb9a460577dFrame 48666.jpg"
+      alt="event delegation"
+    />
+    <div class="box">
+      <button>Button 1</button>
+      <button>Button 2</button>
+      <button>Button 3</button>
+      <button>Button 4</button>
+      <button>Button 5</button>
+      <button>Button 6</button>
+      <button>Button 7</button>
+      <button>Button 8</button>
+    </div>
+
+    <h2>Перевірка цільового елемента події</h2>
+    <img
+      src="./images/2771cf89-722b-494b-9634-5e0d32574b61Untitled (1).png"
+      alt="color palette"
+    />
+    <p class="output">Selected color: -</p>
+    <div class="color-palette"></div>
+
+    <h2>basicLightbox tests</h2>
+    <button id="lightbox" type="button">Show lightbox</button>
+
+    <!-- Library -->
+
+    <!-- ↓ lodash -->
+    <!-- cdn -->
+    <!-- <script
+      src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"
+      async
+    ></script> -->
+
+    <!-- direct from files -->
+    <script type="module" src="./js/lodash.js"></script>
+    <!-- ↑ lodash -->
+
+    <!-- ↓ lightbox -->
+    <script src="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js"></script>
+    <!-- ↑ lightbox -->
+
+    <!-- My script -->
+    <script type="module" src="./js/learn-l8.js"></script>
+  </body>
+</html>
