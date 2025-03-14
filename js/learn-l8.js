@@ -436,6 +436,48 @@ const [red2, green2, blue2, alfa = 0.3] = color2;
 console.log(`rgba(${red2}, ${green2}, ${blue2}, ${alfa})`); // "rgba(200, 255, 100, 0.3)"
 
 console.groupEnd("");
+
+// ------------------------------------------------
+
+console.group("Часткова деструктуризація");
+//* Часткова деструктуризація
+
+// Example Arrays
+const color3 = [200, 255, 100];
+
+const [red3, ...otherColors] = color3;
+
+console.log(red3); // 200
+console.log(otherColors); // [255, 100]
+
+// Example Onjects
+const user3 = {
+  name_3: "Jacob",
+  age_3: 32,
+  email_3: "j.cob@mail.com",
+  isOnline_3: true,
+};
+
+const { name_3, isOnline_3, ...otherProps } = user3;
+
+console.log(name_3); // "Jacob"
+console.log(isOnline_3); // true
+console.log(otherProps); // {age: 32, email: "j.cob@mail.com"}
+
+console.groupEnd("");
+
+// ---
+
+console.group("Пропуск значень");
+//* Пропуск значень
+const rgb = [200, 100, 255];
+
+const [, , blue3] = rgb;
+
+console.log(`Blue: ${blue3}`); // "Blue: 255"
+
+console.groupEnd("");
+
 console.groupEnd("");
 
 console.groupEnd("");
